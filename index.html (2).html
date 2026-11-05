@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ION-X: The Atomic Intelligence Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f7fb;--sf:#fff;--tx:#0e1330;--mu:#5d6580;--bd:#e3e6f0;--ac:#4f46e5;--ac2:#0891b2;--hot:#e8590c;--ok:#059669;--bad:#dc2626;--bar:#c7cbf5;--hb:rgba(246,247,251,.82);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#090c1a;--sf:#121730;--tx:#eef0fb;--mu:#98a1c0;--bd:#232a4a;--ac:#8b92ff;--ac2:#22d3ee;--hot:#ff8a3d;--ok:#34d399;--bad:#f87171;--bar:#2c3470;--hb:rgba(9,12,26,.82)}}
+:root[data-theme="dark"]{--bg:#090c1a;--sf:#121730;--tx:#eef0fb;--mu:#98a1c0;--bd:#232a4a;--ac:#8b92ff;--ac2:#22d3ee;--hot:#ff8a3d;--ok:#34d399;--bad:#f87171;--bar:#2c3470;--hb:rgba(9,12,26,.82)}
+html{scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.6 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hb);z-index:10}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(60% 50% at 85% 0%,color-mix(in srgb,var(--ac) 18%,transparent),transparent),radial-gradient(50% 40% at 0% 30%,color-mix(in srgb,var(--ac2) 12%,transparent),transparent)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--hb);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{display:flex;align-items:center;gap:22px;height:60px}
+.logo{font-weight:800;font-size:19px;letter-spacing:-.02em;color:var(--tx);text-decoration:none;margin-right:auto}
+.logo b{color:var(--ac)}
+nav a{color:var(--mu);text-decoration:none;font-size:14px;font-weight:500}
+nav a:hover{color:var(--tx)}
+.tg{border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:16px}
+@media(max-width:560px){nav a{display:none}}
+.hero{padding:72px 0 40px;max-width:760px}
+h1{font-size:clamp(38px,7vw,68px);line-height:1.03;letter-spacing:-.04em;margin:0 0 18px;font-weight:800}
+h1 span{color:var(--mu);font-weight:600}
+.lead{font-size:18px;color:var(--mu);max-width:600px;margin:0 0 28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:600 15px Manrope,system-ui,sans-serif;padding:12px 20px;border-radius:12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);cursor:pointer;text-decoration:none;transition:transform .15s,border-color .15s}
+.btn:hover{border-color:var(--ac)}.btn:active{transform:scale(.97)}
+.btn.p{background:var(--ac);border-color:var(--ac);color:#fff}
+:root[data-theme="dark"] .btn.p{color:#0a0d1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.p{color:#0a0d1c}}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+section{padding:36px 0}
+h2{font-size:28px;letter-spacing:-.025em;margin:0 0 6px}
+.sub{color:var(--mu);margin:0 0 22px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:24px}
+.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.id{font-weight:800;font-size:20px;letter-spacing:-.02em}
+.id small{color:var(--mu);font-weight:500;font-size:13px;display:block}
+.stats{display:flex;gap:18px}
+.stat{text-align:right}.stat b{display:block;font-size:22px;line-height:1.1;letter-spacing:-.02em}.stat span{font-size:12px;color:var(--mu)}
+.seg{display:inline-flex;border:1px solid var(--bd);border-radius:10px;padding:3px;background:var(--bg)}
+.seg button{border:0;background:none;color:var(--mu);font:600 13px Manrope,system-ui,sans-serif;padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg button.on{background:var(--sf);color:var(--tx);box-shadow:0 0 0 1px var(--bd)}
+.chart{overflow-x:auto;margin:6px 0 14px}
+svg{display:block;width:100%;min-width:520px;height:auto}
+.bar{fill:var(--bar);transition:fill .3s}.bar.hot{fill:var(--hot)}
+.val{font:600 11px Manrope,system-ui,sans-serif;fill:var(--mu);text-anchor:middle}
+.lab{font:600 12px Manrope,system-ui,sans-serif;fill:var(--tx);text-anchor:middle}
+.jl{stroke:var(--hot);stroke-width:1.5;stroke-dasharray:4 4}
+.jt{font:800 13px Manrope,system-ui,sans-serif;fill:var(--hot)}
+.q{font-weight:700;margin:4px 0 10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-width:48px;padding:10px 14px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:700 15px Manrope,system-ui,sans-serif;cursor:pointer;transition:border-color .15s,background .15s}
+.chip:hover:not(:disabled){border-color:var(--ac)}
+.chip.good{background:color-mix(in srgb,var(--ok) 16%,transparent);border-color:var(--ok)}
+.chip.bad{background:color-mix(in srgb,var(--bad) 14%,transparent);border-color:var(--bad);opacity:.7}
+.chip:disabled{cursor:default}
+.msg{margin:14px 0 0;padding:14px 16px;border-radius:14px;background:var(--bg);border:1px solid var(--bd);font-size:15px}
+.msg.ok{border-color:var(--ok)}.msg.no{border-color:var(--bad)}
+.rat{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.rat span{font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:8px;border:1px solid var(--bd);color:var(--mu)}
+.rat span.m{color:var(--hot);border-color:var(--hot)}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.g3 .card h3{margin:0 0 6px;font-size:17px}.g3 .card p{margin:0;color:var(--mu);font-size:15px}
+textarea{width:100%;min-height:84px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:500 15px Manrope,system-ui,sans-serif;padding:12px;resize:vertical}
+textarea:focus,.chip:focus-visible,.btn:focus-visible,.tg:focus-visible,.seg button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+footer{padding:36px 0 48px;color:var(--mu);font-size:13px;border-top:1px solid var(--bd);margin-top:20px}
+.hide{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<header><div class="w"><nav>
+<a class="logo" href="#top">ION<b>-X</b></a>
+<a href="#lab">Mystery Lab</a><a href="#analyzer">Analyzer</a><a href="#how">How it works</a>
+<button class="tg" id="tg" aria-label="Toggle theme">◐</button>
+</nav></div></header>
+
+<main class="w" id="top">
+<div class="hero">
+<h1>Learn chemistry by thinking, <span>not memorizing.</span></h1>
+<p class="lead">ION-X gives you the successive ionization energies of a hidden atom. Read the data, find the jump, and work out which element it is.</p>
+<div class="row"><a class="btn p" href="#lab">Start investigating</a><a class="btn" href="#analyzer">Analyze your own data</a></div>
+</div>
+
+<section id="lab">
+<h2>Mystery Lab</h2>
+<p class="sub">Successive ionization energies in kJ/mol. The element’s name is hidden.</p>
+<div class="card">
+<div class="top">
+<div class="id" id="mid"></div>
+<div class="stats">
+<div class="stat"><b id="sc">0</b><span>Score</span></div>
+<div class="stat"><b id="stk">0</b><span>Streak</span></div>
+<div class="stat"><b id="lv">1</b><span>Level</span></div>
+</div></div>
+<div class="row" style="justify-content:space-between">
+<div class="seg" id="pool"><button data-p="easy" class="on">Groups 1–2</button><button data-p="med">Groups 1–2, 13–14</button><button data-p="all">All elements</button></div>
+<div class="seg" id="scale"><button data-s="log" class="on">Log scale</button><button data-s="lin">Linear</button></div>
+</div>
+<div class="chart" id="ch"></div>
+<div id="s1"><p class="q">How many valence electrons does this atom have?</p><div class="chips" id="vc"></div></div>
+<div id="s2" class="hide"><p class="q">Which element is it? Remember that IE₁ falls as you move down a group.</p><div class="chips" id="ec"></div></div>
+<div id="fb"></div>
+<div class="row" style="margin-top:16px"><button class="btn" id="hint">Run jump detector (−5)</button><button class="btn p hide" id="nx">Next mystery</button></div>
+<div id="rt"></div>
+</div>
+</section>
+
+<section id="analyzer">
+<h2>Analyzer</h2>
+<p class="sub">Paste successive ionization energies from your textbook or lab sheet. The detector finds the jump and suggests the closest element.</p>
+<div class="card">
+<textarea id="inp" aria-label="Ionization energies">496, 4562, 6910, 9543</textarea>
+<div class="row" style="margin:12px 0"><button class="btn p" id="run">Analyze</button><button class="btn" id="ex">Load example</button></div>
+<div class="chart" id="ach"></div><div id="aout"></div>
+</div>
+</section>
+
+<section id="how">
+<h2>How it works</h2>
+<p class="sub">The same reasoning chemists use, in three steps.</p>
+<div class="g3">
+<div class="card"><h3>Observe</h3><p>Each electron you remove costs more energy than the last. The pattern across IE₁, IE₂, IE₃… is the atom’s fingerprint.</p></div>
+<div class="card"><h3>Detect</h3><p>The algorithm divides each value by the one before it. The largest ratio marks the point where removal starts to break into the inner shell.</p></div>
+<div class="card"><h3>Explain</h3><p>Electrons before the jump are valence electrons. Their count gives the group, and the size of IE₁ narrows down the period.</p></div>
+</div>
+</section>
+</main>
+<footer><div class="w">ION-X · educational values rounded from standard reference data · built with HTML, CSS and JavaScript</div></footer>
+
+<script>
+const EL=[
+{s:"Li",n:"Lithium",v:1,ie:[520,7298,11815]},
+{s:"Be",n:"Beryllium",v:2,ie:[900,1757,14849,21007]},
+{s:"B",n:"Boron",v:3,ie:[801,2427,3660,25026,32827]},
+{s:"C",n:"Carbon",v:4,ie:[1086,2353,4621,6223,37831,47277]},
+{s:"N",n:"Nitrogen",v:5,ie:[1402,2856,4578,7475,9445,53267,64360]},
+{s:"O",n:"Oxygen",v:6,ie:[1314,3388,5301,7469,10990,13327,71330,84078]},
+{s:"F",n:"Fluorine",v:7,ie:[1681,3374,6050,8408,11023,15164,17868,92038,106434]},
+{s:"Ne",n:"Neon",v:8,ie:[2081,3952,6122,9371,12177,15238,19999,23069,115380,131432]},
+{s:"Na",n:"Sodium",v:1,ie:[496,4562,6910]},
+{s:"Mg",n:"Magnesium",v:2,ie:[738,1451,7733,10543]},
+{s:"Al",n:"Aluminium",v:3,ie:[578,1817,2745,11577,14842]},
+{s:"Si",n:"Silicon",v:4,ie:[786,1577,3232,4356,16091,19805]},
+{s:"P",n:"Phosphorus",v:5,ie:[1012,1907,2914,4964,6274,21267,25431]},
+{s:"S",n:"Sulfur",v:6,ie:[1000,2252,3357,4556,7004,8496,27107,31719]},
+{s:"Cl",n:"Chlorine",v:7,ie:[1251,2298,3822,5159,6542,9362,11018,33604,38600]},
+{s:"Ar",n:"Argon",v:8,ie:[1521,2666,3931,5771,7238,8781,11995,13842,40760,46186]},
+{s:"K",n:"Potassium",v:1,ie:[419,3052,4420]},
+{s:"Ca",n:"Calcium",v:2,ie:[590,1145,4912,6491]}];
+const $=s=>document.querySelector(s);
+const sub=n=>String(n).replace(/\d/g,d=>"₀₁₂₃₄₅₆₇₈₉"[d]);
+const grp=v=>v<=2?v:10+v;
+const fmt=v=>v.toLocaleString("en-US");
+function detect(ie){const r=[];for(let i=0;i<ie.length-1;i++)r.push(ie[i+1]/ie[i]);const m=r.indexOf(Math.max(...r));return{r,m,v:m+1}}
+function chart(ie,hi,log){
+const W=640,H=250,pl=10,base=205,top=40,n=ie.length,gap=(W-2*pl)/n,bw=Math.min(56,gap-12);
+const mx=Math.max(...ie),mn=Math.min(...ie)*.5;
+const h=v=>log?Math.log(v/mn)/Math.log(mx/mn)*(base-top):v/mx*(base-top);
+let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of successive ionization energies">`;
+ie.forEach((v,i)=>{const x=pl+gap*i+(gap-bw)/2,hh=Math.max(h(v),3),y=base-hh,cx=x+bw/2;
+s+=`<rect class="bar${hi>=0&&i>hi?" hot":""}" x="${x}" y="${y}" width="${bw}" height="${hh}" rx="6"/><text class="val" x="${cx}" y="${y-6}">${fmt(v)}</text><text class="lab" x="${cx}" y="${base+22}">IE${sub(i+1)}</text>`});
+if(hi>=0){const x=pl+gap*(hi+1),r=(ie[hi+1]/ie[hi]).toFixed(1);s+=`<line class="jl" x1="${x}" y1="${top-8}" x2="${x}" y2="${base}"/><text class="jt" x="${x+8}" y="${top-14}">jump ×${r}</text>`}
+return s+"</svg>"}
+const st={el:null,step:1,score:0,streak:0,log:true,pool:"easy",reveal:false,hint:false,done:false,id:0};
+const poolList=()=>EL.filter(e=>st.pool==="easy"?e.v<=2:st.pool==="med"?(e.v<=2||(e.v>=3&&e.v<=4)):true);
+function draw(){
+const e=st.el,d=detect(e.ie);
+$("#mid").innerHTML=`Mystery Atom #${st.id}<small>${e.ie.length} values · element hidden</small>`;
+$("#ch").innerHTML=chart(e.ie,st.reveal?d.m:-1,st.log);
+$("#sc").textContent=st.score;$("#stk").textContent=st.streak;$("#lv").textContent=Math.floor(st.score/60)+1;
+$("#rt").innerHTML=st.reveal?`<div class="rat">${d.r.map((x,i)=>`<span class="${i===d.m?"m":""}">IE${sub(i+2)}/IE${sub(i+1)} = ${x.toFixed(2)}</span>`).join("")}</div>`:"";
+$("#hint").disabled=st.reveal||st.done}
+function next(){
+const p=poolList();let e;do{e=p[Math.floor(Math.random()*p.length)]}while(e===st.el&&p.length>1);
+Object.assign(st,{el:e,step:1,reveal:false,hint:false,done:false,id:Math.floor(100+Math.random()*900)});
+$("#s1").classList.remove("hide");$("#s2").classList.add("hide");$("#nx").classList.add("hide");$("#fb").innerHTML="";
+$("#vc").innerHTML=[1,2,3,4,5,6,7,8].map(n=>`<button class="chip" data-v="${n}">${n}</button>`).join("");
+draw()}
+$("#vc").addEventListener("click",ev=>{
+const b=ev.target.closest(".chip");if(!b||b.disabled)return;const n=+b.dataset.v,e=st.el;
+if(n===e.v){b.classList.add("good");st.reveal=true;if(!st.hint)st.score+=10;st.step=2;
+document.querySelectorAll("#vc .chip").forEach(c=>c.disabled=true);
+$("#fb").innerHTML=`<div class="msg ok"><b>Correct: ${n} valence electron${n>1?"s":""}.</b> The biggest jump comes right after IE${sub(n)}, so this atom is in group ${grp(n)}.</div>`;
+const c=EL.filter(x=>x.v===n);$("#s2").classList.remove("hide");
+$("#ec").innerHTML=c.map(x=>`<button class="chip" data-s="${x.s}">${x.n}</button>`).join("")}
+else{b.classList.add("bad");b.disabled=true;st.streak=0;
+$("#fb").innerHTML=`<div class="msg no"><b>Not ${n}.</b> Look for the point where the energy suddenly multiplies, not for the highest value.</div>`}
+draw()});
+$("#ec").addEventListener("click",ev=>{
+const b=ev.target.closest(".chip");if(!b||b.disabled)return;const e=st.el,d=detect(e.ie);
+document.querySelectorAll("#ec .chip").forEach(c=>{c.disabled=true;if(c.dataset.s===e.s)c.classList.add("good")});
+const ok=b.dataset.s===e.s;
+if(ok){st.score+=20;st.streak++;if(st.streak>1)st.score+=st.streak*2}else{b.classList.add("bad");st.streak=0}
+st.done=true;
+$("#fb").innerHTML=`<div class="msg ${ok?"ok":"no"}"><b>${ok?"Identified: ":"It was "}${e.n} (${e.s}).</b> IE${sub(1)} = ${fmt(e.ie[0])} kJ/mol, and the jump after IE${sub(d.v)} is ×${d.r[d.m].toFixed(1)}. Electrons ${d.v+1} onward come from the inner shell, which sits much closer to the nucleus. Within group ${grp(e.v)}, a lower IE₁ means a larger atom, so the outer electron is held more loosely.</div>`;
+$("#nx").classList.remove("hide");draw()});
+$("#hint").onclick=()=>{st.hint=true;st.reveal=true;st.score=Math.max(0,st.score-5);draw()};
+$("#nx").onclick=next;
+$("#pool").onclick=ev=>{const b=ev.target.closest("button");if(!b)return;st.pool=b.dataset.p;document.querySelectorAll("#pool button").forEach(x=>x.classList.toggle("on",x===b));next()};
+$("#scale").onclick=ev=>{const b=ev.target.closest("button");if(!b)return;st.log=b.dataset.s==="log";document.querySelectorAll("#scale button").forEach(x=>x.classList.toggle("on",x===b));draw();analyze()};
+function analyze(){
+const ie=($("#inp").value.match(/\d+(\.\d+)?/g)||[]).map(Number);
+const o=$("#aout");
+if(ie.length<3){$("#ach").innerHTML="";o.innerHTML=`<div class="msg no">Enter at least 3 values in kJ/mol, separated by commas or spaces.</div>`;return}
+if(ie.some((v,i)=>i&&v<=ie[i-1])){$("#ach").innerHTML="";o.innerHTML=`<div class="msg no">Successive ionization energies must increase. Check the order of your values.</div>`;return}
+const d=detect(ie);$("#ach").innerHTML=chart(ie,d.m,st.log);
+const c=EL.filter(e=>e.v===d.v).map(e=>({e,diff:Math.abs(e.ie[0]-ie[0])/ie[0]*100})).sort((a,b)=>a.diff-b.diff);
+const best=c[0];
+o.innerHTML=`<div class="msg ok"><b>${d.v} valence electron${d.v>1?"s":""} · group ${grp(d.v)}.</b> The largest ratio is IE${sub(d.m+2)}/IE${sub(d.m+1)} = ${d.r[d.m].toFixed(1)}.${best?` Closest match by IE₁: <b>${best.e.n} (${best.e.s})</b>, ${best.diff.toFixed(1)}% away from your first value.`:""}</div><div class="rat">${d.r.map((x,i)=>`<span class="${i===d.m?"m":""}">IE${sub(i+2)}/IE${sub(i+1)} = ${x.toFixed(2)}</span>`).join("")}</div>`}
+$("#run").onclick=analyze;
+$("#ex").onclick=()=>{const e=EL[Math.floor(Math.random()*EL.length)];$("#inp").value=e.ie.join(", ");analyze()};
+$("#tg").onclick=()=>{const r=document.documentElement,cur=r.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");r.dataset.theme=cur==="dark"?"light":"dark"};
+next();analyze();
+</script>
+</body>
+</html>
