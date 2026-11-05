@@ -113,11 +113,7 @@ ion-x/
 
 ## Screenshots
 
-Add screenshots of the Mystery Lab and Analyzer here, for example:
-
-```md
-![Mystery Lab](docs/mystery-lab.png)
-```
+![Mystery Lab](mystery-lab.png)
 
 ## Contributing
 
